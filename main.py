@@ -32,16 +32,30 @@ def hello():
 
     if sieghero.level > wolfhero.level:
         siegclass = 'text-success'
+        siegprogressclass = 'progress-bar-success'
         wolfclass = 'text-danger'
+        wolfprogressclass = 'progress-bar-danger'
     else:
         siegclass = 'text-danger'
+        siegprogressclass = 'progress-bar-danger'
         wolflcass = 'text-success'
+        wolfprogressclass = 'progress-bar-success'
+
+    siegprogresswidth = float(sieghero.level) / (sieghero.level + wolfhero.level)
+    wolfprogresswidth = float(wolfhero.level) / (sieghero.level + wolfhero.level)
+
+    siegprogresswidth = '%0.0f%%' % (siegprogresswidth * 100)
+    wolfprogresswidth = '%0.0f%%' % (wolfprogresswidth * 100)
 
     return render_template('index.jinja2',
                            wolfhero=wolfhero,
                            sieghero=sieghero,
                            wolfclass=wolfclass,
-                           siegclass=siegclass)
+                           siegclass=siegclass,
+                           wolfprogressclass=wolfprogressclass,
+                           siegprogressclass=siegprogressclass,
+                           wolfprogresswidth=wolfprogresswidth,
+                           siegprogresswidth=siegprogresswidth)
 
 @app.errorhandler(404)
 def page_not_found(e):
