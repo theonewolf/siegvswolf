@@ -17,9 +17,9 @@
         </div>
 
         <div class="row">
-            <div class="col-mid-12">
-                <p class="lead">Two brothers began a journey</p>
-                <p> with the release of Seasons for Diablo 3: Reaper of Souls. Hit
+            <div class="col-md-12">
+                <p><span class="lead">Two brothers began a journey</span>
+                with the release of Seasons for Diablo 3: Reaper of Souls. Hit
                 refresh for updates of their progress.  Check back daily!</p>
             </div>
         </div>
@@ -29,14 +29,14 @@
                 <h2 class="text-center">Sieggi's {{ sieghero.class }}: {{ sieghero.name }}</h2>
                 <div class="row">
                     <h3 class="text-center">Level</h3>
-                    <h4 class="text-center">{{ sieghero.level }}</h4>
+                    <h1 class="text-center {{ siegclass }}">{{ sieghero.level }}</h1>
                 </div> 
             </div>
             <div class="col-md-6">
                 <h2 class="text-center">Wolf's {{ wolfhero.class }}: {{ wolfhero.name }}</h2>
                 <div class="row">
                     <h3 class="text-center">Level</h3>
-                    <h4 class="text-center">{{ wolfhero.level }}</h4>
+                    <h1 class="text-center {{ wolfclass }}">{{ wolfhero.level }}</h1>
                 </div>
             </div>
         </div>

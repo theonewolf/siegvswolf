@@ -30,6 +30,13 @@ def hello():
     siegmax = max([h for h in rjson['heroes'] if h['seasonal'] and h['hardcore']], key=lambda x: x['level'])
     sieghero = Hero(siegmax)
 
+    if sieghero.level > wolfhero.level:
+        siegclass = 'text-success'
+        wolfclass = 'text-danger'
+    else:
+        siegclass = 'text-danger'
+        wolflcass = 'text-success'
+
     return render_template('index.jinja2',
                            wolfhero=wolfhero,
                            sieghero=sieghero)
