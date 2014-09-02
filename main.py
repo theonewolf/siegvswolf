@@ -39,7 +39,9 @@ def hello():
 
     return render_template('index.jinja2',
                            wolfhero=wolfhero,
-                           sieghero=sieghero)
+                           sieghero=sieghero,
+                           wolfclass=wolfclass,
+                           siegclass=siegclass)
 
 @app.errorhandler(404)
 def page_not_found(e):
