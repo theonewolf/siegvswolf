@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Sieggi vs Wolf</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    </head>
+
+    <body>
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Competition Between Brothers: Sieggi vs Wolf</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center">Sieggi's {{ sieghero.class }}: {{ sieghero.name }}</h2>
+                <div class="row">
+                    <h3 class="text-center">Level</h3>
+                    <h4 class="text-center">{{ sieghero.level }}</h4>
+                </div> 
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-center">Wolf's {{ wolfhero.class }}: {{ wolfhero.name }}</h2>
+                <div class="row">
+                    <h3 class="text-center">Level</h3>
+                    <h4 class="text-center">{{ wolfhero.level }}</h4>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    </body>
+</html>
