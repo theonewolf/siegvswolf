@@ -1,7 +1,7 @@
-from .util import US_URI, EN_US
+from .util import URI_US, EN_US, BNetConnection
 
-PROFILE_ENDP    = 'profile/%s'
-HERO_ENDP       = 'profile/%s/hero/%s'
+PROFILE_ENDP    = 'profile/%s/'
+HERO_ENDP       = PROFILE_ENDP + 'hero/%s'
 
 class Hero:
     def __init__(self, stats):
@@ -14,7 +14,7 @@ class Hero:
 
 class D3:
 
-    def __init__(self, uri=US_URI, locale=EN_US, api_key=None):
+    def __init__(self, uri=URI_US, locale=EN_US, api_key=None):
         self.bnet = BNetConnection(uri, locale, api_key)
 
     def get_profile(self, profile):

@@ -2,7 +2,7 @@ import requests
 
 
 
-from bnet.d3 import D3
+from bnet.d3 import D3, Hero
 from flask import Flask, render_template
 from os import environ
 
