@@ -1,5 +1,6 @@
 # Google App Engine and other Credentials
 PASSWORD
+app.yaml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

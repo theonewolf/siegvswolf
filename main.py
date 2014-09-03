@@ -2,60 +2,63 @@ import requests
 
 
 
+from bnet.d3 import D3
 from flask import Flask, render_template
+from os import environ
 
+
+
+API_KEY = environ.get('BATTLE_NET_API_KEY', None)
+USER_A  = environ.get('USER_A', None)
+USER_B  = environ.get('USER_B', None)
 
 app = Flask(__name__)
 
-class Hero:
-    def __init__(self, stats):
-        self.update(stats.items())
 
-    def update(self, data):
-        for k,v in data:
-            if k == 'class': v = v.replace('-', ' ').title()
-            setattr(self, k, v)
 
 @app.route('/')
-def hello():
-    r = requests.get('https://us.api.battle.net/d3/profile/theonewolf-1275/?locale=en_US&apikey=hgqmvv3kst5q2ng62s6b2d4w4jqsfxxm')
-    rjson = r.json()
-    
-    wolfmax = max([h for h in rjson['heroes'] if h['seasonal'] and h['hardcore']], key=lambda x: x['level'])
-    wolfhero = Hero(wolfmax)
+def default():
+    bnetconn = D3(api_key=API_KEY)
 
-    r = requests.get('https://us.api.battle.net/d3/profile/thespoon3-1397/?locale=en_US&apikey=hgqmvv3kst5q2ng62s6b2d4w4jqsfxxm')
-    rjson = r.json()
+    profa = bnetconn.get_profile(USER_A)
+    profb = bnetconn.get_profile(USER_B)
 
-    siegmax = max([h for h in rjson['heroes'] if h['seasonal'] and h['hardcore']], key=lambda x: x['level'])
-    sieghero = Hero(siegmax)
+    profamax = max([h for h in profa['heroes']
+                        if h['seasonal'] and h['hardcore']],
+                        key=lambda x: x['level'])
+    profahero = Hero(profamax)
 
-    if sieghero.level > wolfhero.level:
-        siegclass = 'text-success'
-        siegprogressclass = 'progress-bar-success'
-        wolfclass = 'text-danger'
-        wolfprogressclass = 'progress-bar-danger'
+    profbmax = max([h for h in profb['heroes']
+                        if h['seasonal'] and h['hardcore']],
+                        key=lambda x: x['level'])
+    profbhero = Hero(profbmax)
+
+    if profbhero.level > profahero.level:
+        profbclass = 'text-success'
+        profbprogressclass = 'progress-bar-success'
+        profaclass = 'text-danger'
+        profaprogressclass = 'progress-bar-danger'
     else:
-        siegclass = 'text-danger'
-        siegprogressclass = 'progress-bar-danger'
-        wolflcass = 'text-success'
-        wolfprogressclass = 'progress-bar-success'
+        profbclass = 'text-danger'
+        profbprogressclass = 'progress-bar-danger'
+        profaclass = 'text-success'
+        profaprogressclass = 'progress-bar-success'
 
-    siegprogresswidth = float(sieghero.level) / (sieghero.level + wolfhero.level)
-    wolfprogresswidth = float(wolfhero.level) / (sieghero.level + wolfhero.level)
+    profbprogresswidth = float(profbhero.level) / (profbhero.level + profahero.level)
+    profaprogresswidth = float(profahero.level) / (profbhero.level + profahero.level)
 
-    siegprogresswidth = '%0.0f%%' % (siegprogresswidth * 100)
-    wolfprogresswidth = '%0.0f%%' % (wolfprogresswidth * 100)
+    profbprogresswidth = '%0.0f%%' % (profbprogresswidth * 100)
+    profaprogresswidth = '%0.0f%%' % (profaprogresswidth * 100)
 
     return render_template('index.jinja2',
-                           wolfhero=wolfhero,
-                           sieghero=sieghero,
-                           wolfclass=wolfclass,
-                           siegclass=siegclass,
-                           wolfprogressclass=wolfprogressclass,
-                           siegprogressclass=siegprogressclass,
-                           wolfprogresswidth=wolfprogresswidth,
-                           siegprogresswidth=siegprogresswidth)
+                           profahero=profahero,
+                           profbhero=profbhero,
+                           profaclass=profaclass,
+                           profbclass=profbclass,
+                           profaprogressclass=profaprogressclass,
+                           profbprogressclass=profbprogressclass,
+                           profaprogresswidth=profaprogresswidth,
+                           profbprogresswidth=profbprogresswidth)
 
 @app.errorhandler(404)
 def page_not_found(e):

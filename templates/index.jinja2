@@ -27,9 +27,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="progress">
-                    <div class="progress-bar {{ siegprogressclass }}" style="width: {{ siegprogresswidth }}">
+                    <div class="progress-bar {{ profbprogressclass }}" style="width: {{ profbprogresswidth }}">
                     </div>
-                    <div class="progress-bar {{ wolfprogressclass }}" style="width: {{ wolfprogresswidth }}">
+                    <div class="progress-bar {{ profaprogressclass }}" style="width: {{ profaprogresswidth }}">
                     </div>
                 </div>
             </div>
@@ -37,17 +37,17 @@
 
         <div class="row">
             <div class="col-md-6">
-                <h2 class="text-center">Sieggi's {{ sieghero.class }}: {{ sieghero.name }}</h2>
+                <h2 class="text-center">Sieggi's {{ profbhero.class }}: {{ profbhero.name }}</h2>
                 <div class="row">
                     <h3 class="text-center">Level</h3>
-                    <h1 class="text-center {{ siegclass }}">{{ sieghero.level }}</h1>
+                    <h1 class="text-center {{ siegclass }}">{{ profbhero.level }}</h1>
                 </div> 
             </div>
             <div class="col-md-6">
-                <h2 class="text-center">Wolf's {{ wolfhero.class }}: {{ wolfhero.name }}</h2>
+                <h2 class="text-center">Wolf's {{ profahero.class }}: {{ profahero.name }}</h2>
                 <div class="row">
                     <h3 class="text-center">Level</h3>
-                    <h1 class="text-center {{ wolfclass }}">{{ wolfhero.level }}</h1>
+                    <h1 class="text-center {{ wolfclass }}">{{ profahero.level }}</h1>
                 </div>
             </div>
         </div>
