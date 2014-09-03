@@ -12,13 +12,14 @@
     <body>
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center">Competition Between Brothers: Sieggi vs Wolf</h1>
+                <h1 class="text-center">Sieggi vs Wolf</h1>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
-                <p><span class="lead">Two brothers began a journey</span>
+                <p><span class="lead">Two brothers began a journey in August
+                2014</span>
                 with the release of Seasons for Diablo 3: Reaper of Souls. Hit
                 refresh for updates of their progress.  Check back daily!</p>
             </div>
@@ -27,9 +28,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="progress">
-                    <div class="progress-bar {{ profbprogressclass }}" style="width: {{ profbprogresswidth }}">
+                    <div class="progress-bar {{ profbprogressclass }}"
+                         style="width: {{ profbprogresswidth }};">
                     </div>
-                    <div class="progress-bar {{ profaprogressclass }}" style="width: {{ profaprogresswidth }}">
+                    <div class="progress-bar {{ profaprogressclass }}"
+                         style="width: {{ profaprogresswidth }};">
                     </div>
                 </div>
             </div>
@@ -37,21 +40,42 @@
 
         <div class="row">
             <div class="col-md-6">
-                <h2 class="text-center">Sieggi's {{ profbhero.class }}: {{ profbhero.name }}</h2>
+                <div class="row">
+                    <h2 class="text-center">Sieggi (thespoon3)</h2>
+                    <img src="{{ url_for('static', filename='img/crossed_spoons.png') }}" alt="Crossed Spoons" class="img-rounded center-block">
+                </div>
+                <div class="row">
+                    <ul class="text-center list-unstyled">
+                        <li>Season 1, Hardcore</li>
+                        <li>Name: <strong>{{ profbhero.name }}</strong></li>
+                        <li>Class: <strong>{{ profbhero.class }}</strong></li>
+                    </ul>
+                </div>
                 <div class="row">
                     <h3 class="text-center">Level</h3>
-                    <h1 class="text-center {{ siegclass }}">{{ profbhero.level }}</h1>
-                </div> 
+                    <h1 class="text-center text-success">{{ profbhero.level }}</h1>
+                </div>
             </div>
             <div class="col-md-6">
-                <h2 class="text-center">Wolf's {{ profahero.class }}: {{ profahero.name }}</h2>
+                <div class="row">
+                    <h2 class="text-center">Wolf (theonewolf)</h2>
+                    <img src="{{ url_for('static', filename='img/wolf.png') }}" alt="Wolf" class="img-rounded center-block">
+                </div>
+                <div class="row">
+                    <ul class="text-center list-unstyled">
+                        <li>Season 1, Hardcore</li>
+                        <li>Name: <strong>{{ profahero.name }}</strong></li>
+                        <li>Class: <strong>{{ profahero.class }}</strong></li>
+                    </ul>
+                </div>
                 <div class="row">
                     <h3 class="text-center">Level</h3>
-                    <h1 class="text-center {{ wolfclass }}">{{ profahero.level }}</h1>
+                    <h1 class="text-center text-danger">{{ profahero.level }}</h1>
                 </div>
             </div>
         </div>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     </body>
 </html>
