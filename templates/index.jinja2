@@ -1,3 +1,36 @@
+{% macro show_feature(name, value) -%}
+                        <br>
+                        <li>{{ name }}: <strong>{{ value }}</strong></li>
+{%- endmacro %}
+{% macro show_stat(name, value, color) -%}
+                        <li>{{ name }}</li>
+                        <li><strong class="text-{{ color }}">{{ value }}</strong></li>
+                        <br>
+{%- endmacro %}
+{% macro show_hero(hero, color) -%}
+                <div class="col-md-4 col-md-offset-2">
+                    <ul class="text-center list-unstyled">
+                        <li>Season {{ hero.seasonCreated }}{% if hero.hardcore %}, Hardcore{% endif %}</li>
+                        {{ show_feature('Name', hero.name) }}
+                        {{ show_feature('Class', hero.class) }}
+                        {{ show_feature('Sex', hero.gender) }}
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="text-center list-unstyled">
+                    {{ show_stat('Level', hero.level, color) }}
+                    {% if hero.class == 'Wizard' %}
+                    {{ show_stat('Intelligence', hero.stats.intelligence, color) }}
+                    {% elif hero.class == 'Demon Hunter' %}
+                    {{ show_stat('Dexterity', hero.stats.dexterity, color) }}
+                    {% endif %}
+                    {{ show_stat('DPS', hero.stats.damage, color) }}
+                    {{ show_stat('Life', hero.stats.life, color) }}
+                    {{ show_stat('Elite Kills', hero.kills.elites, color) }}
+                    <ul>
+                </div>
+{%- endmacro %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,6 +43,7 @@
     </head>
 
     <body>
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center">Sieggi vs Wolf</h1>
@@ -18,10 +52,9 @@
 
         <div class="row">
             <div class="col-md-12">
-                <p><span class="lead">Two brothers began a journey in August
-                2014</span>
-                with the release of Seasons for Diablo 3: Reaper of Souls. Hit
-                refresh for updates of their progress.  Check back daily!</p>
+                <p class="lead text-center">Two brothers began a journey in
+                August 2014 with the release of Seasons for Diablo 3: Reaper of
+                Souls.</p>
             </div>
         </div>
 
@@ -44,38 +77,22 @@
                     <h2 class="text-center">Sieggi (thespoon3)</h2>
                     <img src="{{ url_for('static', filename='img/crossed_spoons.png') }}" alt="Crossed Spoons" class="img-rounded center-block">
                 </div>
-                <div class="row">
-                    <ul class="text-center list-unstyled">
-                        <li>Season 1, Hardcore</li>
-                        <li>Name: <strong>{{ profbhero.name }}</strong></li>
-                        <li>Class: <strong>{{ profbhero.class }}</strong></li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <h3 class="text-center">Level</h3>
-                    <h1 class="text-center text-success">{{ profbhero.level }}</h1>
-                </div>
+                {{ show_hero(profbhero, 'success') }}
             </div>
             <div class="col-md-6">
                 <div class="row">
                     <h2 class="text-center">Wolf (theonewolf)</h2>
-                    <img src="{{ url_for('static', filename='img/wolf.png') }}" alt="Wolf" class="img-rounded center-block">
+                    <img src="{{ url_for('static', filename='img/wolf.png') }}"
+                         alt="Wolf" class="img-rounded center-block">
                 </div>
                 <div class="row">
-                    <ul class="text-center list-unstyled">
-                        <li>Season 1, Hardcore</li>
-                        <li>Name: <strong>{{ profahero.name }}</strong></li>
-                        <li>Class: <strong>{{ profahero.class }}</strong></li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <h3 class="text-center">Level</h3>
-                    <h1 class="text-center text-danger">{{ profahero.level }}</h1>
+                {{ show_hero(profahero, 'danger') }}
                 </div>
             </div>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    </div>
     </body>
 </html>
