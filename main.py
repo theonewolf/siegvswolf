@@ -2,7 +2,7 @@ import requests
 
 
 
-from bnet.d3 import D3, Hero
+from bnet.d3 import D3
 from flask import Flask, render_template
 from os import environ
 
@@ -23,15 +23,15 @@ def default():
     profa = bnetconn.get_profile(USER_A)
     profb = bnetconn.get_profile(USER_B)
 
-    profamax = max([h for h in profa['heroes']
+    profamax = max([h for h in profa.heroes
                         if h['seasonal'] and h['hardcore']],
                         key=lambda x: x['level'])
-    profahero = Hero(profamax)
+    profahero = bnetconn.get_hero(USER_A, profamax['id'])
 
-    profbmax = max([h for h in profb['heroes']
+    profbmax = max([h for h in profb.heroes
                         if h['seasonal'] and h['hardcore']],
                         key=lambda x: x['level'])
-    profbhero = Hero(profbmax)
+    profbhero = bnetconn.get_hero(USER_B, profbmax['id'])
 
     if profbhero.level > profahero.level:
         profbclass = 'text-success'
