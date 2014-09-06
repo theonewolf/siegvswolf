@@ -24,6 +24,7 @@
                 <div class="col-md-4">
                     <ul class="text-center list-unstyled">
                     {{ show_stat('Level', hero.level, color) }}
+                    {{ show_stat('Paragon Level', hero.paragonLevel, color) }}
                     {% if hero.class == 'Wizard' %}
                     {{ show_stat('Intelligence', hero.stats.intelligence, color) }}
                     {% elif hero.class == 'Demon Hunter' %}
