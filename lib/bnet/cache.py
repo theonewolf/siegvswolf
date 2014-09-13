@@ -11,6 +11,7 @@ from google.appengine.ext import deferred
 
 
 from datetime import datetime
+from time import time
 
 
 CACHE_TIMEOUT   =  30
@@ -33,15 +34,15 @@ def cached(func):
                                 data=data)
             cr.put()
         else:
-            ts = cr.timestamp
-            currtime = datetime.utcnow()
+            oldtime = cr.timestamp
+            ts = time()
+            currtime = datetime.utcfromtimestamp(ts)
 
-            td = currtime - ts
+            td = currtime - oldtime
 
             if td.seconds > CACHE_TIMEOUT:
                 try:
-                    task_name = endpoint.replace('/', '-') + '%d' %
-                                (td.seconds / CACHE_TIMEOUT)
+                    task_name = endpoint.replace('/', '-') + '%d' % (int(ts))
                     deferred.defer(update_cache, self, endpoint,
                                    _name=task_name, **kwargs)
                 except TaskAlreadyExistsError:
