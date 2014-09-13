@@ -1,4 +1,4 @@
-from .util import URI_US, EN_US, BNetConnection
+from .bnet import URI_US, EN_US, BNetConnection
 
 PROFILE_ENDP    = 'profile/%s/'
 HERO_ENDP       = PROFILE_ENDP + 'hero/%s'
