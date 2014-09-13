@@ -4,8 +4,6 @@ runtime: python27
 api_version: 1
 threadsafe: yes
 
-builtins:
-- deferred: on
 
 builtins:
 - deferred: on
