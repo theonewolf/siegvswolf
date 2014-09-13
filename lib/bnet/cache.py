@@ -10,11 +10,10 @@ from google.appengine.ext import deferred
 from datetime import datetime
 
 
-
 CACHE_TIMEOUT   =  30
 
 def update_cache(self, endpoint, **kwargs):
-    data = raw_get(self, endpoint, **kwargs)
+    data = self.get(endpoint, **kwargs)
     key = ndb.Key(CachedResponse, endpoint)
     cr = key.get()
     cr.data = data

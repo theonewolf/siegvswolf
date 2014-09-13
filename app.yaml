@@ -7,6 +7,9 @@ threadsafe: yes
 builtins:
 - deferred: on
 
+builtins:
+- deferred: on
+
 handlers:
 - url: /favicon.ico
   static_files: static/img/favicon.ico
