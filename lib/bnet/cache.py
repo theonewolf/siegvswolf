@@ -4,6 +4,7 @@ from .util import raw_get
 
 
 from google.appengine.api.taskqueue import TaskAlreadyExistsError
+from google.appengine.api.taskqueue import TombstonedTaskError
 from google.appengine.ext import ndb
 from google.appengine.ext import deferred
 
@@ -45,6 +46,9 @@ def cached(func):
                     logging.critical('Task <%s> already exists.  ' %
                                      (endpoint.replace('/','-')))
                     logging.critical('Could not update cache.')
+                except TombstonedTaskError:
+                    logging.critical('Tombstoned task exception encountered.')
+                    logging.critical('Attempting to serve old cache data.')
 
         return cr.data
     return cached_check
