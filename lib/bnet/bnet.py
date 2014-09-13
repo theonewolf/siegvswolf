@@ -13,4 +13,4 @@ class BNetConnection:
 
     @cached
     def get(self, endpoint, **kwargs):
-        return raw_get(self.locale, self.api_key, self.uri, endpoint, **kwargs)
+        return raw_get(self, endpoint, **kwargs)
