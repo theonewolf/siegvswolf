@@ -1,3 +1,7 @@
+from .util import raw_get
+
+
+
 from google.appengine.ext import ndb
 from google.appengine.ext import deferred
 
@@ -6,10 +10,11 @@ from google.appengine.ext import deferred
 from datetime import datetime
 
 
+
 CACHE_TIMEOUT   =  30
 
 def update_cache(self, endpoint, **kwargs):
-    data = self.get(endpoint, **kwargs)
+    data = raw_get(self, endpoint, **kwargs)
     key = ndb.Key(CachedResponse, endpoint)
     cr = key.get()
     cr.data = data
@@ -32,7 +37,8 @@ def cached(func):
             td = currtime - ts
 
             if td.seconds > CACHE_TIMEOUT:
-                deferred.defer(update_cache, self, endpoint, **kwargs)
+                deferred.defer(update_cache, self, endpoint,
+                               _name=endpoint.replace('/', '-'), **kwargs)
 
         return cr.data
     return cached_check
