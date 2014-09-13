@@ -1,3 +1,4 @@
+import logging
 from .util import raw_get
 
 
@@ -36,8 +37,13 @@ def cached(func):
             td = currtime - ts
 
             if td.seconds > CACHE_TIMEOUT:
-                deferred.defer(update_cache, self, endpoint,
-                               _name=endpoint.replace('/', '-'), **kwargs)
+                try:
+                    deferred.defer(update_cache, self, endpoint,
+                                   _name=endpoint.replace('/', '-'), **kwargs)
+                except TaskAlreadyExistsError:
+                    logging.critical('Task <%s> already exists.  ' %
+                                     (endpoint.replace('/','-')))
+                    logging.critical('Could not update cache.')
 
         return cr.data
     return cached_check
