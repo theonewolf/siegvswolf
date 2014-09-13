@@ -3,6 +3,7 @@ from .util import raw_get
 
 
 
+from google.appengine.api.taskqueue import TaskAlreadyExistsError
 from google.appengine.ext import ndb
 from google.appengine.ext import deferred
 
