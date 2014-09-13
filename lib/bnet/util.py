@@ -21,9 +21,5 @@ class BNetConnection:
         kwargs['locale'] = self.locale
         kwargs['apikey'] = self.api_key
 
-        print endpoint
-        print self.uri + endpoint
-
         r = requests.get(self.uri + endpoint, params=kwargs)
-        print r.url
         return r.json()
