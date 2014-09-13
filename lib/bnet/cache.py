@@ -41,7 +41,9 @@ def cached(func):
             if td.seconds > CACHE_TIMEOUT:
                 try:
                     deferred.defer(update_cache, self, endpoint,
-                                   _name=endpoint.replace('/', '-'), **kwargs)
+                                   _name=endpoint.replace('/', '-') + '%d' %
+                                   (currtime.seconds / CACHE_TIMEOUT),
+                                   **kwargs)
                 except TaskAlreadyExistsError:
                     logging.critical('Task <%s> already exists.  ' %
                                      (endpoint.replace('/','-')))
