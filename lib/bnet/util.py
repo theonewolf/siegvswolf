@@ -1,13 +1,9 @@
+from cache import cached
+
 import requests
 
 URI_US = 'https://us.api.battle.net/d3/'
 EN_US  = 'en_US'
-
-def cached(func):
-    def cached_check(self, endpoint, **kwargs):
-        return func(self, endpoint, **kwargs)
-    return cached_check
-
 
 class BNetConnection:
     
