@@ -51,6 +51,9 @@ def cached(func):
                 except TombstonedTaskError:
                     logging.critical('Tombstoned task exception encountered.')
                     logging.critical('Attempting to serve old cache data.')
+                    logging.critical('Stored timestamp was: %s' %
+                                     str(cr.timestamp))
+                    logging.critical('Current time is: %s' % str(currtime))
 
         return cr.data
     return cached_check
