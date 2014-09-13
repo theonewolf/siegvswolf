@@ -23,42 +23,44 @@ def update_cache(self, endpoint, **kwargs):
     cr.data = data
     cr.put()
 
-def cached(func):
-    def cached_check(self, endpoint, **kwargs):
-        key = ndb.Key(CachedResponse, endpoint)
-        cr = key.get()
-        if not cr:
-            data = func(self, endpoint, **kwargs)
-            cr = CachedResponse(key=key,
-                                endpoint=endpoint,
-                                data=data)
-            cr.put()
-        else:
-            oldtime = cr.timestamp
-            ts = time()
-            currtime = datetime.utcfromtimestamp(ts)
+def cached(timeout=CACHE_TIMEOUT):
+    def func_wrapper(func):
+        def cached_check(self, endpoint, **kwargs):
+            key = ndb.Key(CachedResponse, endpoint)
+            cr = key.get()
+            if not cr:
+                data = func(self, endpoint, **kwargs)
+                cr = CachedResponse(key=key,
+                                    endpoint=endpoint,
+                                    data=data)
+                cr.put()
+            else:
+                oldtime = cr.timestamp
+                ts = time()
+                currtime = datetime.utcfromtimestamp(ts)
 
-            td = currtime - oldtime
+                td = currtime - oldtime
 
-            if td.seconds > CACHE_TIMEOUT:
-                try:
-                    task_name = endpoint.replace('/', '-') + '%d' % (int(ts))
-                    deferred.defer(update_cache, self, endpoint,
-                                   _name=task_name, **kwargs)
-                except TaskAlreadyExistsError:
-                    logging.critical('Task <%s> already exists.  ' %
-                                     task_name)
-                    logging.critical('Could not update cache.')
-                except TombstonedTaskError:
-                    logging.critical('Tombstoned task <%s> encountered.' %
-                                     task_name)
-                    logging.critical('Attempting to serve old cache data.')
-                    logging.critical('Stored timestamp was: %s' %
-                                     str(cr.timestamp))
-                    logging.critical('Current time is: %s' % str(currtime))
+                if td.seconds > timeout:
+                    try:
+                        task_name = endpoint.replace('/', '-') + '%d' % (int(ts))
+                        deferred.defer(update_cache, self, endpoint,
+                                       _name=task_name, **kwargs)
+                    except TaskAlreadyExistsError:
+                        logging.critical('Task <%s> already exists.  ' %
+                                         task_name)
+                        logging.critical('Could not update cache.')
+                    except TombstonedTaskError:
+                        logging.critical('Tombstoned task <%s> encountered.' %
+                                         task_name)
+                        logging.critical('Attempting to serve old cache data.')
+                        logging.critical('Stored timestamp was: %s' %
+                                         str(cr.timestamp))
+                        logging.critical('Current time is: %s' % str(currtime))
 
-        return cr.data
-    return cached_check
+            return cr.data
+        return cached_check
+    return func_wrapper 
 
 
 

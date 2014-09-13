@@ -11,6 +11,6 @@ class BNetConnection:
         self.locale = locale
         self.uri = uri
 
-    @cached
+    @cached(600)
     def get(self, endpoint, **kwargs):
         return raw_get(self, endpoint, **kwargs)
