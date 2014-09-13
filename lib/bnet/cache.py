@@ -40,16 +40,17 @@ def cached(func):
 
             if td.seconds > CACHE_TIMEOUT:
                 try:
+                    task_name = endpoint.replace('/', '-') + '%d' %
+                                (td.seconds / CACHE_TIMEOUT)
                     deferred.defer(update_cache, self, endpoint,
-                                   _name=endpoint.replace('/', '-') + '%d' %
-                                   (td.seconds / CACHE_TIMEOUT),
-                                   **kwargs)
+                                   _name=task_name, **kwargs)
                 except TaskAlreadyExistsError:
                     logging.critical('Task <%s> already exists.  ' %
-                                     (endpoint.replace('/','-')))
+                                     task_name)
                     logging.critical('Could not update cache.')
                 except TombstonedTaskError:
-                    logging.critical('Tombstoned task exception encountered.')
+                    logging.critical('Tombstoned task <%s> encountered.' %
+                                     task_name)
                     logging.critical('Attempting to serve old cache data.')
                     logging.critical('Stored timestamp was: %s' %
                                      str(cr.timestamp))
