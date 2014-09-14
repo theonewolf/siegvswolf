@@ -17,7 +17,7 @@ from time import time
 CACHE_TIMEOUT   =  30
 
 def update_cache(self, endpoint, **kwargs):
-    data = self.get(endpoint, **kwargs)
+    data = raw_get(self, endpoint, **kwargs)
     key = ndb.Key(CachedResponse, endpoint)
     cr = key.get()
     cr.data = data
@@ -43,11 +43,12 @@ def cached(timeout=CACHE_TIMEOUT):
 
                 if td.seconds > timeout:
                     try:
-                        task_name = endpoint.replace('/', '-') + '%d' % (int(ts))
+                        task_name = endpoint.replace('/', '-') +
+                                    '-%d' % (int(ts))
                         deferred.defer(update_cache, self, endpoint,
                                        _name=task_name, **kwargs)
                     except TaskAlreadyExistsError:
-                        logging.critical('Task <%s> already exists.  ' %
+                        logging.critical('Task <%s> already exists.' %
                                          task_name)
                         logging.critical('Could not update cache.')
                     except TombstonedTaskError:
