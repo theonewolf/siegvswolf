@@ -43,7 +43,7 @@ def cached(timeout=CACHE_TIMEOUT):
 
                 if td.seconds > timeout:
                     try:
-                        task_name = endpoint.replace('/', '-') +
+                        task_name = endpoint.replace('/', '-') + \
                                     '-%d' % (int(ts))
                         deferred.defer(update_cache, self, endpoint,
                                        _name=task_name, **kwargs)
