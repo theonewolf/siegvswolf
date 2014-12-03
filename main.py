@@ -33,7 +33,7 @@ def default():
                         key=lambda x: x['level'])
     profbhero = bnetconn.get_hero(USER_B, profbmax['id'])
 
-    if profbhero.level > profahero.level:
+    if profbhero.level >= profahero.level:
         profbclass = 'text-success'
         profbprogressclass = 'progress-bar-success'
         profaclass = 'text-danger'
