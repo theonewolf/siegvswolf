@@ -74,9 +74,15 @@ def default():
                                profbprogressclass=profbprogressclass,
                                profaprogresswidth=profaprogresswidth,
                                profbprogresswidth=profbprogresswidth)
-    return render_template('index-failed.jinja2',
-                           profahero=profahero,
-                           profbhero=profbhero)
+    if profahero:
+        return render_template('index-failed.jinja2',
+                               profahero=profahero)
+    elif profbhero:
+        return render_template('index-failed.jinja2',
+                               profbhero=profbhero)
+    else:
+        return render_template('index-failed.jinja2')
+
 
 @app.errorhandler(404)
 def page_not_found(e):
