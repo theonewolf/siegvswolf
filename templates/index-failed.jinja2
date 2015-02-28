@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Sieggi vs Wolf</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    </head>
+
+    <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Sieggi vs Wolf</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <p class="lead text-center">Two brothers began a journey in
+                August 2014 with the release of <abbr title="Lasting
+                approximately 3 months, you have to start from scratch.">
+                Seasons</abbr> for <a href="http://www.amazon.com/gp/product/B00FENJVOE/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00FENJVOE&linkCode=as2&tag=sievswol-20&linkId=OJUIYICMDLCVJ66X">Diablo 3: Reaper of
+                Souls</a>.</p>
+                <p class="lead text-center">They challenged each other to a
+                <abbr title="Death is permanent.  Each fight is an adrenaline
+                             rush.">Hardcore</abbr> journey with a class of
+                their choosing.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <img src="{{ url_for('static', filename='img/crossed_spoons.png') }}"
+                         alt="Crossed Spoons" class="img-rounded center-block">
+                    <h3 class="text-center">Sieggi (thespoon3)</h2>
+                    <object type="application/x-shockwave-flash"
+                            height="240" width="320"
+                            class="center-block"
+                            id="live_embed_player_flash"
+                            data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=thespoon3"
+                            bgcolor="#000000">
+                            <param name="allowFullScreen" value="true" />
+                            <param name="allowScriptAccess" value="always" />
+                            <param name="allowNetworking" value="all" />
+                            <param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" />
+                            <param name="flashvars" value="hostname=www.twitch.tv&channel=thespoon3&auto_play=true&start_volume=25" />
+                    </object>
+                </div>
+                <div class="row">
+                    <br>
+                </div>
+                <div class="row">
+                {% if profbhero is not None %}
+                    <h3>OK, Sieggi has a current Seasonal hardcore character!</h3>
+                {% else %}
+                    <h3>For shame, Sieggi does not have a current seasonal hardcore character!</h3>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <img src="{{ url_for('static', filename='img/wolf.png') }}"
+                         alt="Wolf" class="img-rounded center-block">
+                    <h3 class="text-center">Wolf (theonewolf)</h2>
+                    <object type="application/x-shockwave-flash"
+                            height="240" width="320"
+                            class="center-block"
+                            id="live_embed_player_flash"
+                            data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=theonewolf87"
+                            bgcolor="#000000">
+                            <param name="allowFullScreen" value="true" />
+                            <param name="allowScriptAccess" value="always" />
+                            <param name="allowNetworking" value="all" />
+                            <param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" />
+                            <param name="flashvars" value="hostname=www.twitch.tv&channel=theonewolf87&auto_play=true&start_volume=25" />
+                            </object>
+                </div>
+                <div class="row">
+                    <br>
+                </div>
+                <div class="row">
+                {% if profahero is not None %}
+                    <h3>OK, Sieggi has a current Seasonal hardcore character!</h3>
+                {% else %}
+                    <h3>For shame, Sieggi does not have a current seasonal hardcore character!</h3>
+                {% endif %}    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Sieggi vs Wolf Horizontal Banner -->
+                <ins class="adsbygoogle"
+                     style="display:block;width:728px;height:90px;margin-left:auto;margin-right:auto;"
+                     data-ad-client="ca-pub-2425250040782903"
+                     data-ad-slot="1094653516"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script> 
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-54752773-1', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+    </div>
+    </body>
+</html>
