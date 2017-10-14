@@ -27,7 +27,7 @@ def default():
         profamax = max([h for h in profa.heroes
                         if h['seasonal'] and h['hardcore']],
                         key=lambda x: x['level'])
-    except ValueError:
+    except (AttributeError, ValueError):
         profamax = None
 
     if profamax is not None:
@@ -39,7 +39,7 @@ def default():
         profbmax = max([h for h in profb.heroes
                         if h['seasonal'] and h['hardcore']],
                         key=lambda x: x['level'])
-    except ValueError:
+    except (AttributeError, ValueError):
         profbmax = None
 
     if profbmax is not None:
